@@ -5,20 +5,35 @@
     rows: 1
     cols: 5
     Spinner:
+        id: month_spinner
         values: app.calendar.list_of_months
         text: app.calendar.list_of_months[app.calendar.cal_month - 1]
     Spinner:
-        values: app.calendar.list_of_months
-        text: app.calendar.list_of_months[app.calendar.cal_month - 1]
+        id: year_spinner
+        values: [str(_) for _ in range(app.calendar.current_year-5, app.calendar.current_year+5)]
+        text: str(app.calendar.current_year)
     Button:
         text: "<"
+        on_press:
+            app.calendar.cal_month -= 1
+            self.parent.ids.month_spinner.text = app.calendar.list_of_months[app.calendar.cal_month - 1]
+
     Button:
         text: ">"
+        on_press:
+            app.calendar.cal_month += 1
+            self.parent.ids.month_spinner.text = app.calendar.list_of_months[app.calendar.cal_month - 1]
+
+
 
 <ButtonGrid@GridLayout>:
+    cols: 7
+    rows: 6
+    Button:
+        text: "1"
+    
 
 <WeekDays@BoxLayout>:
-    
 
 
 
@@ -32,6 +47,7 @@
     NaviPalkki:
         size_hint_y: None    
         height: 50
+    ButtonGrid:
     WeekDays:
     
 
