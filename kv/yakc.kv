@@ -1,0 +1,61 @@
+#:kivy 2.2.0
+#:import Calendar calendar.Calendar
+
+<NaviPalkki@GridLayout>:
+    rows: 1
+    cols: 5
+    Spinner:
+        values: app.calendar.list_of_months
+        text: app.calendar.list_of_months[app.calendar.cal_month - 1]
+    Spinner:
+        values: app.calendar.list_of_months
+        text: app.calendar.list_of_months[app.calendar.cal_month - 1]
+    Button:
+        text: "<"
+    Button:
+        text: ">"
+
+<ButtonGrid@GridLayout>:
+
+<WeekDays@BoxLayout>:
+    
+
+
+
+<CalendarView>:
+    # Kalenterin näkymä
+    orientation: "vertical"
+    year: int(app.calendar.cal_year)
+    month: int(app.calendar.cal_month)
+    list_of_months: app.calendar.list_of_months
+    days: [(_ if _ > 0 else "") for _ in Calendar().itermonthdays(self.year, self.month)] + [""] * 14
+    NaviPalkki:
+        size_hint_y: None    
+        height: 50
+    WeekDays:
+    
+
+<CalendarContainer>:
+    # Containeri koko kalenterikikkareelle
+    FloatLayout:
+        Image:
+            source: "images/tausta-lehdet.png"
+            fit_mode: "fill"
+
+        GridLayout:
+            cols: 1
+            rows: 2
+            CalendarView:
+                size_hint_y: None
+                height: root.height * 0.9
+            Label:
+                id: date
+                text: "Today is: " + str(app.calendar.current_date)
+
+<MainWindow>:
+    GridLayout:
+        cols: 1
+        rows: 2
+        CalendarContainer:
+
+    
