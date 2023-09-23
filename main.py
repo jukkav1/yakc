@@ -8,10 +8,15 @@ from kivy.uix.screenmanager import Screen
 from kivy.app import App
 from kivy.uix.label import Label
 from kivy.uix.widget import Widget
+from kivy.uix.button import Button
 
 Window.size = (360, 640)
 Builder.load_file("kv/weekdays.kv")
 Builder.load_file("kv/yakc.kv")
+
+
+class DayGrid(GridLayout):
+    pass
 
 
 class WeekDays(GridLayout):
@@ -79,6 +84,7 @@ class YAKC(App):
         # kalenteri Kalenteri = new Kalenteri :Kappa:
         self.calendar = MyCalendar()
         self.calendarview = CalendarView()
+        self.daygrid = DayGrid()
         mw = MainWindow()
         return mw
 

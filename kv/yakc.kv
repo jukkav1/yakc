@@ -8,6 +8,10 @@
         id: month_spinner
         values: app.calendar.list_of_months
         text: app.calendar.list_of_months[app.calendar.cal_month - 1]
+        on_text:
+            app.calendar.month = app.calendar.list_of_months.index(self.text) + 1
+
+
     Spinner:
         id: year_spinner
         values: [str(_) for _ in range(app.calendar.current_year-5, app.calendar.current_year+5)]
@@ -24,15 +28,6 @@
             app.calendar.cal_month += 1
             self.parent.ids.month_spinner.text = app.calendar.list_of_months[app.calendar.cal_month - 1]
 
-
-
-<ButtonGrid@GridLayout>:
-    cols: 7
-    rows: 6
-    Button:
-        text: "1"
-    Button:
-        text: "2"
     
 <CalendarView>:
     # Kalenterin näkymä
@@ -45,7 +40,18 @@
         size_hint_y: None    
         height: 50
     WeekDays:
-    ButtonGrid:
+    Week:
+        weekdays: root.days[0:7]
+    Week:
+        weekdays: root.days[7:14]
+    Week:
+        weekdays: root.days[14:21]
+    Week:
+        weekdays: root.days[21:28]
+    Week:
+        weekdays: root.days[28:35]
+    Week:
+        weekdays: root.days[35:]
     
 
 <CalendarContainer>:
@@ -71,4 +77,27 @@
         rows: 2
         CalendarContainer:
 
-    
+
+<Day@Button>:
+    background_color_normal: ""
+    background_color: (127, 64, 0, 1)
+    color: (0, 0, 0, 1)
+    entrylist: []
+
+<Week@BoxLayout>:
+    datepicker: root.parent
+    weekdays: ["","","","","","",""]
+    Day:
+        text: str(root.weekdays[0])
+    Day:
+        text: str(root.weekdays[1])
+    Day:
+        text: str(root.weekdays[2])
+    Day:
+        text: str(root.weekdays[3])
+    Day:
+        text: str(root.weekdays[4])
+    Day:
+        text: str(root.weekdays[5])
+    Day:
+        text: str(root.weekdays[6])
