@@ -11,21 +11,22 @@ from kivy.uix.widget import Widget
 from kivy.uix.button import Button
 
 Window.size = (360, 640)
-Builder.load_file("kv/weekdays.kv")
 Builder.load_file("kv/yakc.kv")
 
 
-class DayGrid(GridLayout):
-    pass
-
-
 class WeekDays(GridLayout):
-    pass
+    cols = 7
+    rows = 1
+    weekdays = ["Ma", "Ti", "Ke", "To", "Pe", "La", "Su"]
+    color = (0, 0, 0, 1)
+
+    def __init__(self, **kwargs):
+        super(WeekDays, self).__init__(**kwargs)
+        for _ in self.weekdays:
+            self.add_widget(Label(text=_, color=self.color))
 
 
 class MyCalendar:
-    """generic Kalenteri object defs and some functions"""
-
     list_of_months = [
         "Tammi",
         "Helmi",
@@ -46,47 +47,30 @@ class MyCalendar:
     cal_month = current_month
     cal_year = current_year
 
-    def set_entry(day: int, month: int, year: int, text: str):
-        """create one text entry by date on database (N/A)"""
-        pass
-
-    def get_single_entry(day: int, month: int, year: int) -> str:
-        """get single entry by date from database (N/A)"""
-        pass
-
-    def get_multi_entry(month: int, year: int) -> list:
-        """get a list of days with entries from database (N/A)"""
-        pass
-
 
 class CalendarView(BoxLayout):
     pass
 
 
 class MainWindow(BoxLayout):
-    """Main placehodler for the app"""
-
     pass
 
 
 class CalendarContainer(Screen):
-    """Container screen for calendar"""
+    pass
 
+
+class DayGrid(GridLayout):
     pass
 
 
 class YAKC(App):
-    """Yet Another Kivy Calander"""
-
     def build(self, *args):
-        """Building methods"""
-
-        # kalenteri Kalenteri = new Kalenteri :Kappa:
         self.calendar = MyCalendar()
         self.calendarview = CalendarView()
         self.daygrid = DayGrid()
-        mw = MainWindow()
-        return mw
+        self.mw = MainWindow()
+        return self.mw
 
 
 if __name__ == "__main__":
