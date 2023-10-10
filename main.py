@@ -7,8 +7,6 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.screenmanager import Screen
 from kivy.app import App
 from kivy.uix.label import Label
-from kivy.uix.widget import Widget
-from kivy.uix.button import Button
 
 Window.size = (360, 640)
 Builder.load_file("kv/yakc.kv")
