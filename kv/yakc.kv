@@ -1,5 +1,4 @@
 #:kivy 2.2.0
-#:import Calendar calendar.Calendar
 
 <NaviPalkki@GridLayout>:
     rows: 1
@@ -35,31 +34,14 @@
     year: int(app.calendar.cal_year)
     month: int(app.calendar.cal_month)
     list_of_months: app.calendar.list_of_months
-    days: [(_ if _ > 0 else "") for _ in Calendar().itermonthdays(self.year, self.month)] + [""] * 14
     NaviPalkki:
         size_hint_y: None    
         height: 50
     WeekDays:
-    Week:
-        weekdays: root.days[0:7]
-    Week:
-        weekdays: root.days[7:14]
-    Week:
-        weekdays: root.days[14:21]
-    Week:
-        weekdays: root.days[21:28]
-    Week:
-        weekdays: root.days[28:35]
-    Week:
-        weekdays: root.days[35:]
-    
 
 <CalendarContainer>:
     # Containeri koko kalenterikikkareelle
     FloatLayout:
-        Image:
-            source: "images/tausta-lehdet.png"
-            fit_mode: "fill"
 
         GridLayout:
             cols: 1
@@ -85,19 +67,3 @@
     entrylist: []
 
 <Week@BoxLayout>:
-    datepicker: root.parent
-    weekdays: ["","","","","","",""]
-    Day:
-        text: str(root.weekdays[0])
-    Day:
-        text: str(root.weekdays[1])
-    Day:
-        text: str(root.weekdays[2])
-    Day:
-        text: str(root.weekdays[3])
-    Day:
-        text: str(root.weekdays[4])
-    Day:
-        text: str(root.weekdays[5])
-    Day:
-        text: str(root.weekdays[6])
